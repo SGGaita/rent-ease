@@ -1,0 +1,13 @@
+.table-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    padding: 20px;
+    background: #f7f7f75e;
+    box-shadow: 0 0 0 0.5px rgb(195, 195, 195);
+    border-radius: 5px;
+    h3 {
+        margin: 0 0 10px 0;
+        font-weight: bold;
+    }
+}

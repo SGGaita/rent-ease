@@ -8,7 +8,7 @@ export const AddTenants = () => {
         <div className="main">
             <div className="container">
                 <div className="content">
-                    <TenantsForm formInputs={tenantInputs} collectionName="Tenants" title="New Tenant" />
+                    <TenantsForm formInputs={tenantInputs} collectionName="Tenants" title="Add New Tenant to" />
                 </div>
             </div>
         </div>

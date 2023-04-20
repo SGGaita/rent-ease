@@ -84,7 +84,7 @@ export const Sidebar = ({ sidebarOpen }) => {
           <span className={`${isOpen ? "" : "closed"}`}>Tenants</span>
           <div className={`sub-menu ${isOpen ? "" : "closed"}`}>
             <ul>
-              <li><Link to="/tenants/add-tenant">Add Tenant</Link></li>
+              <li><Link to="/tenants/to-property">Add Tenant</Link></li>
               <li><Link to="/tenants/view-tenants">View Tenants</Link></li>
             </ul>
           </div>
@@ -94,7 +94,6 @@ export const Sidebar = ({ sidebarOpen }) => {
           <span className={`${isOpen ? "" : "closed"}`}>Lease Agreements</span>
           <div className={`sub-menu ${isOpen ? "" : "closed"}`}>
             <ul>
-              <li><Link to="/lease-agreements/add-lease-agreement">Add Lease Agreement</Link></li>
               <li><Link to="/lease-agreements/view-lease-agreements">View Lease Agreements</Link></li>
             </ul>
           </div>

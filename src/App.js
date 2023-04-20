@@ -26,6 +26,7 @@ import {
   ChangePassword,
   SignUp
 } from "./pages";
+import { AddTenantsToProperty } from "./pages/tenants/AddTenantsToProperty";
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
               <Route path="view-properties" element={<ListProperties title="Properties" />} />
             </Route>
             <Route path="tenants">
+              <Route path="to-property" element={<AddTenantsToProperty/>}/>
               <Route path="add-tenant" element={<AddTenants title="Add new" />} />
               <Route path="view-tenants" element={<ListTenants title="Tenants" />} />
             </Route>

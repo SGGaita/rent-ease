@@ -1,5 +1,7 @@
 import React from 'react'
 import './lease.scss'
+import { LeaseTable } from './LeaseTable'
+import { leaseColumns } from '../../utils'
 
 export const ViewLeaseAgreements = () => {
     return (
@@ -7,7 +9,7 @@ export const ViewLeaseAgreements = () => {
             <div className="container">
                 <div className="content">
                 <div className="heading">
-                        <h3>View lease agreements</h3>
+                        <LeaseTable columnSource={leaseColumns} title="All lease agreements" />
                     </div>
                 </div>
             </div>

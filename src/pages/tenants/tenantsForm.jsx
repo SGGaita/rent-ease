@@ -1,10 +1,12 @@
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './tenantform.scss'
 import { db } from '../../firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { TenantContext } from '../../context/AuthContext';
+import { PropertyContext } from '../../context/PropertyContext';
 
 
 export const TenantsForm = ({ formInputs, title, collectionName, idValue }) => {
@@ -12,6 +14,9 @@ export const TenantsForm = ({ formInputs, title, collectionName, idValue }) => {
     const [isSubmitting, setIsSubmitting] = useState(false); // add state variable for form submission status
     const [isRedirecting, setIsRedirecting] = useState(false); // add state variable for redirecting status
     const navigate = useNavigate()
+    // add this after the import statements
+    const { dispatch: tenantDispatch } = useContext(TenantContext);
+    const { state:{property} } = useContext(PropertyContext);
 
 
 
@@ -28,74 +33,45 @@ export const TenantsForm = ({ formInputs, title, collectionName, idValue }) => {
 
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        //add the property id to the form before submitting
+        let formData = {...formState, 'propertyID': property.propertyId}
         // handle form submission here
         setIsSubmitting(true);
 
         try {
+            const docRef = await addDoc(collection(db, collectionName), formData);
+            console.log('Document written with ID: ', docRef.id);
+            toast.success('Tenant information submitted added successfully!');
+            setFormState({});
+            // set isSubmitting to false when submission succeeds
+            setIsSubmitting(false);
 
-        }catch(error){
-         console.error('Error adding document: ', error);
-         toast.error('Error adding document: ' + error.message);
-         setIsSubmitting(false); // set isSubmitting to false when submission fails
+            // add this inside the try block of the handleSubmit function
+            tenantDispatch({ type: 'SET_TENANT', payload: { tenantId: docRef.id, tenantName: formData.firstName + ' ' + formData.lastName } });
+            setIsRedirecting(true);
+            setTimeout(() => {
+                setIsRedirecting(false);
+                navigate('/lease-agreements/add-lease-agreement'); // redirect to the Add Lease page
+            }, 3000);
+        } catch (error) {
+            console.error('Error adding document: ', error);
+            toast.error('Error adding document: ' + error.message);
+            // set isSubmitting to false when submission fails
+            setIsSubmitting(false);
 
         }
 
-        setIsRedirecting(true);
-        setTimeout(() => {
-            setIsRedirecting(false);
-            navigate('/lease-agreements/add-lease-agreement'); // redirect to the Add Lease page
-        }, 3000);
+
     };
 
-    // const handleSubmit = async (e) => {
-
-    //     e.preventDefault();
-    //     //const isAddingTenantsForm = collectionName === 'Tenants'; // add this line to check if adding tenants
-
-    //     let formData = formState
-    //     console.log("Form data", formData)
-    //     if (idValue) {
-    //         formData = { ...formState, [idValue.name]: idValue.value };
-    //     }
-
-
-
-
-    //     setIsSubmitting(true); // set isSubmitting to true when form is submitted
-
-    //     try {
-    //         const docRef = await addDoc(collection(db, collectionName), formData);
-    //         console.log('Document written with ID: ', docRef.id);
-    //         toast.success('Document added successfully!');
-    //         setFormState({});
-    //         setIsSubmitting(false); // set isSubmitting to false when submission succeeds
-
-    //         // set isRedirecting to true to show message to user
-    //         if (isAddingTenantsForm) { // add this condition to redirect only when adding tenants
-    //             setIsRedirecting(true);
-    //             // delay the redirect by 2 seconds using setTimeout
-    //             setTimeout(() => {
-    //                 setIsRedirecting(false);
-    //                 navigate('/lease-agreements/add-lease-agreement'); // redirect to the Add Lease page
-    //             }, 2000);
-
-    //         }
-
-
-
-    //     } catch (error) {
-    //         console.error('Error adding document: ', error);
-    //         toast.error('Error adding document: ' + error.message);
-    //         setIsSubmitting(false); // set isSubmitting to false when submission fails
-    //     }
-    // };
 
     return (
         <div className="form-wrapper">
             <form className="form" onSubmit={handleSubmit}>
-                <h3>{title}</h3>
+                <h3>{title} : {property.propertyName}</h3>
                 <div className="form-sections">
                     {formInputs.map((section, i) => (
 

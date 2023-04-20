@@ -34,7 +34,7 @@ export const Greeting = () => {
         <>
             <div className="date">{formattedDate}</div>
             <div className="greetings">
-                <h4>{greeting}, {user.user.firstName} {user.user.lastName}</h4>
+                <h4>{greeting}, {user.user.firstName} {user.lastName}</h4>
             </div>
         </>
 
