@@ -1,0 +1,508 @@
+.sidebarOpen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  height: 100vh;
+  background-color: #f5f5f585;
+  box-shadow: 0 0 0 0.5px #aca7a742;
+  transition: all 0.3s ease-out;
+
+  &.closed {
+    width: calc(240px/ 3);
+  }
+
+  // logo and brand
+  .top {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    background-color: #ededed;
+
+    img {
+      width: 200px;
+    }
+
+    .image_cropped {
+      width: 55px;
+    }
+
+    .toggle-button {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      height: 60px;
+      cursor: pointer;
+    }
+  }
+
+  // Center menu items
+  .menu-items {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100vh;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 30px;
+
+    li {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      cursor: pointer;
+      height: 30px;
+
+      &:hover {
+        background-color: #0a0a0a;
+        color: #fff;
+
+        .sub-menu {
+          display: block;
+        }
+      }
+
+      .icon {
+        margin-right: 10px;
+      }
+
+      span {
+        font-size: 16px;
+        visibility: visible;
+        transition: font-size 0.7s ease;
+
+        a {
+          text-decoration: none;
+          color: black;
+
+          &:hover {
+            color: white;
+          }
+        }
+
+        /* Set initial visibility based on sidebar state */
+        &.closed {
+          visibility: hidden;
+          font-size: 0px;
+        }
+      }
+
+      .sub-menu {
+        position: absolute;
+        top: 0;
+        left: 260px;
+        width: 260px;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 0.5px #ededed;
+        display: none;
+        z-index: 2;
+
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        li {
+          height: 30px;
+
+          &:hover {
+            background-color: #f7f7f7;
+          }
+        }
+      }
+    }
+
+    /* Add sub-menu for Properties */
+    .properties {
+
+      .sub-menu {
+
+        position: absolute;
+        top: 0;
+        left: 260px;
+        width: 270px;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 0.5px #ededed;
+        display: none;
+
+
+
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        li {
+          display: flex;
+          align-items: center;
+          padding: 12px 20px;
+          cursor: pointer;
+          height: 30px;
+
+          &:hover {
+            background-color: #0a0a0a;
+
+
+
+          }
+
+          a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+
+    /* Add sub-menu for Tenants */
+    .tenants {
+
+      .sub-menu {
+        position: absolute;
+        top: 0;
+        left: 260px;
+        width: 270px;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 0.5px #ededed;
+        display: none;
+
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        li {
+          display: flex;
+          align-items: center;
+          padding: 12px 20px;
+          cursor: pointer;
+          height: 30px;
+
+          &:hover {
+            background-color: #0a0a0a;
+
+
+
+          }
+
+          a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+
+    /* Add sub-menu for Lease Agreements */
+    .lease-agreements {
+      .sub-menu {
+        position: absolute;
+        top: 0;
+        left: 260px;
+        width: 270px;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 0.5px #ededed;
+        display: none;
+
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        li {
+          display: flex;
+          align-items: center;
+          padding: 12px 20px;
+          cursor: pointer;
+          height: 30px;
+
+          &:hover {
+            background-color: #0a0a0a;
+
+
+
+          }
+
+          a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
+      }
+
+      /* Add sub-menu for Payments */
+    }
+
+    .payments {
+      .sub-menu {
+        position: absolute;
+        top: 0;
+        left: 260px;
+        width: 270px;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 0.5px #ededed;
+        display: none;
+
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        li {
+          display: flex;
+          align-items: center;
+          padding: 12px 20px;
+          cursor: pointer;
+          height: 30px;
+
+          &:hover {
+            background-color: #0a0a0a;
+
+
+
+          }
+
+          a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+
+    /* Add sub-menu for reports */
+    .reports {
+      .sub-menu {
+        position: absolute;
+        top: 0;
+        left: 260px;
+        width: 270px;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 0.5px #ededed;
+        display: none;
+
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        li {
+          display: flex;
+          align-items: center;
+          padding: 12px 20px;
+          cursor: pointer;
+          height: 30px;
+
+          &:hover {
+            background-color: #0a0a0a;
+
+
+
+          }
+
+          a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+
+    /* Add sub-menu for Maintenance Requests */
+    .maintenance-requests {
+      .sub-menu {
+        position: absolute;
+        top: 0;
+        left: 260px;
+        width: 270px;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 0.5px #ededed;
+        display: none;
+
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        li {
+          display: flex;
+          align-items: center;
+          padding: 12px 20px;
+          cursor: pointer;
+          height: 30px;
+
+          &:hover {
+            background-color: #0a0a0a;
+
+
+
+          }
+
+          a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+
+    /* Add sub-menu for Account */
+    .account {
+      .sub-menu {
+        position: absolute;
+        top: 0;
+        left: 260px;
+        width: 270px;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 0.5px #ededed;
+        display: none;
+
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        li {
+          display: flex;
+          align-items: center;
+          padding: 12px 20px;
+          cursor: pointer;
+          height: 30px;
+
+          &:hover {
+            background-color: #0a0a0a;
+
+
+
+          }
+
+          a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  //Bottom
+  .bottom {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    //height: 100vh;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+
+    li {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      cursor: pointer;
+      height: 30px;
+
+      &:hover {
+        background-color: #0a0a0a;
+        color: #fff;
+
+        .sub-menu {
+          display: block;
+        }
+      }
+
+      .icon {
+        margin-right: 10px;
+      }
+
+      span {
+        font-size: 16px;
+        visibility: visible;
+        transition: font-size 0.7s ease;
+
+        a {
+          text-decoration: none;
+          color: black;
+
+          &:hover {
+            color: white;
+          }
+        }
+
+        /* Set initial visibility based on sidebar state */
+        &.closed {
+          visibility: hidden;
+          font-size: 0px;
+        }
+      }
+
+      .sub-menu {
+        position: absolute;
+        top: 0;
+        left: 260px;
+        width: 260px;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 0.5px #ededed;
+        display: none;
+
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        li {
+          height: 30px;
+
+          &:hover {
+            background-color: #f7f7f7;
+          }
+        }
+      }
+    }
+
+  }
+}
