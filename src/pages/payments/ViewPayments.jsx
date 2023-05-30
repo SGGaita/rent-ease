@@ -1,5 +1,7 @@
 import React from 'react'
-import './payments.scss'
+import './paymenttable.scss'
+import {PaymentTable} from './PaymentTable'
+import { paymentColumns } from '../../utils'
 
 export const ViewPayments = () => {
     return (
@@ -7,7 +9,7 @@ export const ViewPayments = () => {
             <div className="container">
                 <div className="content">
                 <div className="heading">
-                        <h3>Payments</h3>
+                        <PaymentTable columnSource={paymentColumns} title="Rent Payments"/>
                     </div>
                 </div>
             </div>

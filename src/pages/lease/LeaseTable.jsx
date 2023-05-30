@@ -4,8 +4,6 @@ import { DataGrid } from '@mui/x-data-grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import { db } from '../../firebaseConfig';
 import { collection, query, onSnapshot, deleteDoc, doc, where } from 'firebase/firestore';
-import { Link } from 'react-router-dom';
-import CustomPrompt from '../../components/confirmPrompt/ConfirmPrompt';
 import { AuthContext } from '../../context/AuthContext';
 
 
@@ -77,18 +75,34 @@ export const LeaseTable = ({ collectionName, columnSource, title, route }) => {
     }, []);
 
 
-    const rows = leases.map((lease,i) => ({
-        id: i+1,
-        firstName: tenants[lease.tenantId]?.firstName,
-        lastName: tenants[lease.tenantId]?.lastName,
-        idNumber: tenants[lease.tenantId]?.idNumber,
-        phone: tenants[lease.tenantId]?.phone,
-        name: properties[lease.propertyId]?.name,
-        address: properties[lease.propertyId]?.address,
-        county: properties[lease.propertyId]?.county,
-        city: properties[lease.propertyId]?.city,
-        moveInDate: lease.moveInDate
-      }));
+    const rows = leases.map((lease, i) => {
+        const tenant = tenants[lease.tenantId];
+        const property = properties[lease.propertyId];
+        const name = `${tenant?.firstName} ${tenant?.lastName}`;
+        const rent = parseInt(property?.rent || 0);
+        const waterBill = parseInt(property?.water_bill || 0);
+        const garbageBill = parseInt(property?.garbage_bill || 0);
+        const securityBill = parseInt(property?.security_bill || 0);
+        const totalBill = rent + waterBill + garbageBill + securityBill;
+      
+        return {
+          id: i + 1,
+          tenantName: name,
+          idNumber: tenant?.idNumber,
+          phone: tenant?.phone,
+          name: property?.name,
+          rent: `Kes ${rent}`,
+          water: `Kes ${waterBill}`,
+          garbage: `Kes ${garbageBill}`,
+          security: `Kes ${securityBill}`,
+          totalBill: `Kes ${totalBill}`,
+          moveInDate: new Date(lease.moveInDate).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+          })
+        };
+      });
 
     if (loading) {
         return (
@@ -140,15 +154,7 @@ export const LeaseTable = ({ collectionName, columnSource, title, route }) => {
             renderCell: (params) => (
                 <>
                     <button style={{ margin: '2px', backgroundColor: '#4caf50', color: '#fff' }} onClick={() => handleEdit(params.id)}>View</button>
-                    <button style={{ margin: '2px', backgroundColor: '#f44336', color: '#fff' }} onClick={handleOpen}>Delete</button>
-                    {/* Render a custom prompt component */}
-                    <CustomPrompt open={open}
-                        handleClose={handleClose}
-                        title="Confirm Delete"
-                        message="Are you sure you want to delete this item?"
-                        confirmText="Delete"
-                        cancelText="Cancel"
-                        onConfirm={handleDelete} />
+                    
                 </>
             )
         },

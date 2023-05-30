@@ -78,6 +78,7 @@ export const LoginPage = () => {
                     <div>
                         <a href="#">Forgot your password?</a>
                     </div>
+                    
                 </form>
             </div>
         </div>
